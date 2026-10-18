@@ -1,6 +1,6 @@
-# mall-test-practice — mall 开源电商系统全链路测试实战
+# mall-test-practice — 电商平台全链路测试实战
 
-对 GitHub 60k+ Star 的开源电商项目 [macrozheng/mall](https://github.com/macrozheng/mall) 进行的独立测试实战，覆盖**接口自动化、UI 自动化、性能压测与缺陷报告**全流程。
+针对一套前后端分离的电商平台（Spring Boot + Vue，覆盖商品/订单/购物车/优惠券/支付完整交易链路）开展的全链路测试实战，独立完成**环境部署 → 用例设计 → 接口/UI 自动化 → 性能压测 → 缺陷报告**全流程闭环。
 
 ## 成果总览
 
@@ -15,16 +15,15 @@
 ## 被测环境部署
 
 ```bash
-# 方式一：仅跑 mall-admin（最轻量，需 MySQL + Redis）
-# 方式二：Docker Compose 全套（推荐）
+# 被测系统源码获取与环境搭建（MySQL + Redis + 中间件）
 git clone https://github.com/macrozheng/mall.git
 cd mall/document/docker/docker-compose
 docker-compose up -d
 ```
 
 部署完成后核对两件事：
-1. 后台接口文档：`http://localhost:8080/swagger-ui.html`（mall-admin）
-2. 前台接口文档：`http://localhost:8085/swagger-ui.html`（mall-portal）
+1. 后台接口文档：`http://localhost:8080/swagger-ui.html`（后台管理端）
+2. 前台接口文档：`http://localhost:8085/swagger-ui.html`（前台商城端）
 
 > ⚠️ **接口路径以本地 Swagger 为准**。本工程的接口封装集中在 `api/` 目录，如与你部署版本有出入，只需改 `api/` 下的路径常量，用例层不动。
 
@@ -64,5 +63,5 @@ mall-test-practice/
 
 - 用例全部按 **AAA（Arrange-Act-Assert）** 格式编写，见 `docs/test_cases.md`
 - 接口用例分层：正常流 → 参数边界 → 异常码 → 鉴权/越权
-- 断言不仅校验 HTTP 状态码，同时校验业务码（mall 统一返回 `code=200`）与关键字段
+- 断言不仅校验 HTTP 状态码，同时校验业务码（被测系统统一返回 `code=200`）与关键字段
 - 缺陷必须先在本地复现确认后才会提交 issue，样例见 `docs/defects.md`

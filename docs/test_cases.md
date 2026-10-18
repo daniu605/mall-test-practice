@@ -38,6 +38,23 @@
 | TC-ORDER-002 | 空购物车下单 | P2 | 购物车为空 | cartItemIds=[] | 业务错误提示，无 500 |
 | TC-ORDER-003 | 未登录下单被拦截 | P0 | 裸客户端 | POST /order/generateOrder | HTTP 401 |
 
+## 模块六：品牌管理（写操作数据自清理）
+
+| 用例编号 | 用例标题 | 优先级 | Arrange | Act | Assert |
+|---|---|---|---|---|---|
+| TC-BRAND-001 | 创建品牌全链路 | P1 | uuid 唯一品牌名 | POST /brand/create → 检索 → 更新 → 删除 | 各步业务码 200，列表可见，清理后环境复原 |
+| TC-BRAND-002 | 缺 name 创建被拦截 | P2 | 缺 name 的 payload | POST /brand/create | 业务码非 200，不 500 |
+| TC-BRAND-003 | 删除不存在品牌 | P3 | 超大 id | POST /brand/delete/99999999 | 业务报错，不 500 |
+
+## 模块七：分页与登录数据驱动矩阵
+
+| 用例编号 | 用例标题 | 优先级 | Arrange | Act | Assert |
+|---|---|---|---|---|---|
+| TC-PAGE-001~005 | pageNum 边界矩阵 | P2 | 参数化 [1,2,9999,0,-1] | GET /product/list | 全部 HTTP 200，越界页空列表 |
+| TC-PAGE-006~009 | pageSize 边界矩阵 | P2 | 参数化 [1,100,0,-1] | GET /product/list | HTTP 200，合法容量不超限 |
+| TC-LOGIN-D01~D06 | 登录异常凭据矩阵 | P0 | YAML 数据驱动（空用户名/错密码/注入片段/超长输入/XSS） | POST /admin/login | 全部登录失败，接口不 500 |
+| TC-CART-Q01~Q05 | 加购数量边界 | P0 | YAML 数据驱动（0/-1/999999/1/999） | POST /cart/add | 非法数量被拦截（防资损），正常数量成功 |
+
 ## 覆盖率统计口径
 
 - 功能用例：90+ 条，按模块分布——登录鉴权 12 / 商品 18 / 购物车 16 / 订单 20 / 优惠券 10 / 会员 8 / 兼容性 6

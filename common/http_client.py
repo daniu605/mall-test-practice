@@ -22,10 +22,12 @@ def load_config() -> dict:
 class HttpClient:
     """按模块（admin/portal）实例化的带鉴权 HTTP 客户端。"""
 
-    def __init__(self, module: str):
+    default_module = None  # 子类指定自己的默认配置模块
+
+    def __init__(self, module: str = None):
         cfg = load_config()
         self.cfg = cfg
-        self.module_cfg = cfg[module]
+        self.module_cfg = cfg[module or self.default_module]
         self.base_url = self.module_cfg["base_url"].rstrip("/")
         self.success_code = cfg["http"]["success_code"]
         self.timeout = cfg["http"]["timeout"]
@@ -79,6 +81,8 @@ class HttpClient:
 class AdminClient(HttpClient):
     """mall-admin 后台管理端。"""
 
+    default_module = "admin"
+
     @property
     def login_path(self) -> str:
         return "/admin/login"
@@ -89,6 +93,8 @@ class AdminClient(HttpClient):
 
 class PortalClient(HttpClient):
     """mall-portal 前台商城端（会员端）。"""
+
+    default_module = "portal"
 
     @property
     def login_path(self) -> str:

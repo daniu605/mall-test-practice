@@ -1,0 +1,22 @@
+# 购物车数量边界数据驱动用例集
+# expect_accept=true 表示服务端可接受；false 表示应被业务校验拦截（防资损关键卡点）
+cases:
+  - name: "边界-数量为0"
+    quantity: 0
+    expect_accept: false
+
+  - name: "异常-负数"
+    quantity: -1
+    expect_accept: false
+
+  - name: "异常-超大数量(999999)"
+    quantity: 999999
+    expect_accept: false
+
+  - name: "正常流-数量1"
+    quantity: 1
+    expect_accept: true
+
+  - name: "边界-数量999"
+    quantity: 999
+    expect_accept: true

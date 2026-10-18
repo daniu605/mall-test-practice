@@ -4,13 +4,16 @@
 
 ## 成果总览
 
+> 自动化用例数以 `pytest --collect-only` 实际输出为准（当前 **106 条**：接口 82 + UI 24），CI 每次提交自动校验。
+
 | 产出 | 数量 |
 |---|---|
-| 功能测试用例（AAA 格式） | 90+ 条 |
-| 接口自动化用例（Pytest+Requests） | 80+ 条 |
-| UI 自动化场景（Playwright PO 模式） | 20+ 个 |
+| 接口自动化用例（Pytest+Requests，含参数化数据驱动） | 82 条 |
+| UI 自动化场景（Playwright，含参数化） | 24 个 |
+| 功能测试用例（AAA 格式文档，全集由 Xmind 管理） | 90+ 条 |
 | JMeter 性能场景 | 2 组（登录/商品搜索） |
-| 缺陷/优化建议 | 提交至官方仓库（见 docs/defects.md） |
+| 缺陷/优化建议 | 见 docs/defects.md |
+| CI | GitHub Actions：依赖安装 + 用例可收集性检查 |
 
 ## 被测环境部署
 

@@ -1,0 +1,25 @@
+# 登录鉴权数据驱动用例集（异常凭据矩阵）
+cases:
+  - name: "空用户名"
+    username: ""
+    password: "macro123"
+
+  - name: "错误密码"
+    username: "admin"
+    password: "wrong_password_123"
+
+  - name: "不存在的用户"
+    username: "no_such_user_qa"
+    password: "macro123"
+
+  - name: "SQL注入片段"
+    username: "admin' or '1'='1"
+    password: "' or '1'='1"
+
+  - name: "超长输入(200字符)"
+    username: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    password: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+
+  - name: "特殊字符用户名"
+    username: "<script>alert(1)</script>"
+    password: "macro123"

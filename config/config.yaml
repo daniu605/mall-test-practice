@@ -1,0 +1,15 @@
+# mall 测试环境配置（按本地实际部署调整）
+admin:
+  base_url: "http://localhost:8080"
+  username: "admin"
+  password: "macro123"
+
+portal:
+  base_url: "http://localhost:8085"
+  username: "test_member"
+  password: "test123456"
+
+http:
+  timeout: 10
+  # mall 统一响应业务码
+  success_code: 200

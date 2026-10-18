@@ -1,0 +1,22 @@
+# 商品搜索数据驱动用例集
+# 设计说明：关键词按「正常流 / 边界 / 异常」三类分层，新增搜索场景只需在此追加条目，用例代码零改动。
+cases:
+  - name: "正常流-常见关键词"
+    keyword: "小米"
+    expect_empty: false
+
+  - name: "正常流-英文关键词"
+    keyword: "iphone"
+    expect_empty: false
+
+  - name: "边界-单字符"
+    keyword: "手"
+    expect_empty: false
+
+  - name: "边界-超长字符串(200字符)"
+    keyword: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    expect_empty: true
+
+  - name: "异常-特殊字符与SQL片段"
+    keyword: "%' or '1'='1"
+    expect_empty: true
